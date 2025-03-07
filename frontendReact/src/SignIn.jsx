@@ -9,19 +9,23 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-      e.preventDefault();
-      axios.post('http://localhost:8000/login', {
-          email: email,
-          password: password,
-      })
-      .then(response => {
-        console.log(response)
-        if(response.data.message === "Login successful") {
-          navigate('/')
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/login", { email, password })
+      .then((response) => {
+        if (response.data.token) {
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("role", response.data.user.role); 
+          
+          if (response.data.user.role === "admin") {
+            navigate("/admin-home");
+          } else {
+            navigate("/user-home");
+          }
         }
       })
-      .catch(error => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="flex items-center justify-center w-full min-h-screen bg-gray-100">
