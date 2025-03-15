@@ -8,7 +8,7 @@ const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    navigate("/signin");
+    navigate("/");
   };
 
   return (
@@ -19,12 +19,22 @@ const NavBar = () => {
           <>
             <li>
               <Link to="/admin-home" className="hover:underline">
-                Admin Dashboard
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/signup" className="hover:underline">
+                Create a User
               </Link>
             </li>
             <li>
               <Link to="/manage-users" className="hover:underline">
                 Manage Users
+              </Link>
+            </li>
+            <li>
+              <Link to="/create-order" className="hover:underline">
+                Create Order
               </Link>
             </li>
           </>

@@ -6,7 +6,7 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user"); // Default role is "user"
+  const [role, setRole] = useState("user"); 
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ function SignUp() {
         name: name,
         email: email,
         password: password,
-        role: role, // Send role to backend
+        role: role, 
       })
       .then((response) => {
         console.log(response);
@@ -28,9 +28,9 @@ function SignUp() {
 
   const handleRoleChange = (newRole) => {
     if (newRole === "admin") {
-      setShowModal(true); // Show confirmation modal
+      setShowModal(true); 
     } else {
-      setRole("user"); // Set role directly to "user"
+      setRole("user");
     }
   };
 
@@ -47,7 +47,7 @@ function SignUp() {
   return (
     <div className="flex items-center justify-center w-full h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h1 className="text-2xl font-semibold text-center mb-4">Sign Up</h1>
+        <h1 className="text-2xl font-semibold text-center mb-4">Create User</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Full Name</label>
