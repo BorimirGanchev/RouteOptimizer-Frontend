@@ -12,7 +12,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="bg-blue-500 p-4 text-white flex justify-between items-center">
+    <nav className="bg-blue-500 p-4 text-white flex justify-between items-center fixed top-0 left-0 w-full z-10">
       <h1 className="text-xl font-bold">My App</h1>
       <ul className="flex gap-4">
         {role === "admin" ? (
@@ -43,6 +43,11 @@ const NavBar = () => {
             <li>
               <Link to="/user-home" className="hover:underline">
                 User Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/orders" className="hover:underline">
+                Orders for distribution
               </Link>
             </li>
             <li>

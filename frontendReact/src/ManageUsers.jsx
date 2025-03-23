@@ -22,26 +22,60 @@ function ManageUsers() {
     fetchUsers();
   }, []);
 
+  const handleStatusChange = async (userId, newStatus) => {
+    try {
+      const token = localStorage.getItem("token");
+      await axios.put(
+        `http://localhost:8000/users/${userId}/status`,
+        { status: newStatus },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+  
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, status: newStatus } : user
+        )
+      );
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
+  const handleDeleteClick = async (user) => {
+    const confirmDelete = window.confirm(`Are you sure you want to delete ${user.name}?`);
+  
+    if (!confirmDelete) return;
+  
+    try {
+      const token = localStorage.getItem("token");
+      await axios.delete(`http://localhost:8000/users/${user._id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+  
+      setUsers((prevUsers) => prevUsers.filter((u) => u._id !== user._id));
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+  
+
   const handleAssignOrders = async () => {
     try {
       const token = localStorage.getItem("token");
   
-      // 🔹 Step 1: Fetch orders from your backend (not Python)
       const ordersResponse = await axios.get("http://localhost:8000/orders", {
         headers: { Authorization: `Bearer ${token}` },
       });
   
       console.log("Fetched orders from backend:", ordersResponse.data);
   
-      // 🔹 Step 2: Extract processed orders (this is already sent to Python inside the backend)
-      const orderAssignment = ordersResponse.data; // Expected: { "orderId1": 0, "orderId2": 1, ... }
+      const orderAssignment = ordersResponse.data; 
   
       if (!orderAssignment || Object.keys(orderAssignment).length === 0) {
         alert("No valid orders for deployment.");
         return;
       }
   
-      // 🔹 Step 3: Group orders by cluster
       const clusteredOrders = {};
       for (const [orderId, cluster] of Object.entries(orderAssignment)) {
         if (!clusteredOrders[cluster]) clusteredOrders[cluster] = [];
@@ -50,7 +84,6 @@ function ManageUsers() {
   
       console.log("Clustered Orders:", clusteredOrders);
   
-      // 🔹 Step 4: Fetch available users
       const availableUsers = users.filter(user => user.status === "available");
   
       if (availableUsers.length === 0) {
@@ -60,11 +93,9 @@ function ManageUsers() {
   
       console.log("Available Users:", availableUsers);
   
-      // 🔹 Step 5: Shuffle users for random assignment
       const shuffledUsers = [...availableUsers].sort(() => Math.random() - 0.5);
       let userIndex = 0;
   
-      // 🔹 Step 6: Assign each cluster to a courier
       for (const cluster in clusteredOrders) {
         const orderIdsArray = clusteredOrders[cluster];
   
@@ -73,7 +104,6 @@ function ManageUsers() {
         const assignedUser = shuffledUsers[userIndex % shuffledUsers.length];
         console.log(`Assigning cluster ${cluster} (Orders: ${orderIdsArray}) to ${assignedUser.name}`);
   
-        // 🔹 Step 7: Send assignment to backend
         await axios.put(
           `http://localhost:8000/users/${assignedUser._id}/ordersasaign`,
           { orders: orderIdsArray },

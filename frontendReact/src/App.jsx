@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState } from 'react'; 
 import SignIn from './SignIn';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import SignUp from './SignUp';
@@ -8,6 +8,7 @@ import UserHome from './UserHome';
 import NavBar from './components/NavBar';
 import ManageUsers from './ManageUsers';
 import NewOrder from './NewOrder';
+import Orders from './Orders';
 
 function App() { 
 
@@ -45,6 +46,14 @@ function App() {
           element={
             <PrivateRoute role="user">
               <UserHome />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <PrivateRoute role="user">
+              <Orders />
             </PrivateRoute>
           }
         />
