@@ -1,6 +1,7 @@
-import React, { useState } from 'react'; 
-import SignIn from './SignIn';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { checkTokenExpiration } from "./utils/auth";
+import SignIn from './SignIn';
 import SignUp from './SignUp';
 import PrivateRoute from './components/PrivateRoutes';
 import AdminHome from './AdminHome';
@@ -9,11 +10,31 @@ import NavBar from './components/NavBar';
 import ManageUsers from './ManageUsers';
 import NewOrder from './NewOrder';
 import Orders from './Orders';
+import { useNavigate } from "react-router-dom";
 
-function App() { 
+function AuthChecker() {
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (checkTokenExpiration()) {
+        alert("Session expired. Please log in again.");
+        localStorage.removeItem("token"); 
+        localStorage.removeItem("role");
+        navigate("/"); 
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [navigate]);
+
+  return null; 
+}
+
+function App() {
   return (
     <BrowserRouter>
+      <AuthChecker />
       <NavBar />
       <Routes>
         <Route path="/" element={<SignIn />} />

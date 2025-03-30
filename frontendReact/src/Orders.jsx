@@ -4,11 +4,11 @@ import OrderList from "./components/OrderList";
 
 function Orders() {
   return (
-    <div style={{ display: "flex", height: "100vh" , overflow: "hidden", paddingTop: "7vh" }}>
-      <div style={{ flex: 1 }}>
+    <div className="flex h-[92vh] md:overflow-y-hidden md:flex-row flex-col">
+      <div className="flex-1 m-6">
         <MapComponent />
       </div>
-      <div style={{ display: "flex", height: "100vh" }}>
+      <div className="flex h-[92vh] pt-[60px]" >
         <OrderList />
       </div>
 
