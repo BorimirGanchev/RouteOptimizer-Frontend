@@ -19,7 +19,7 @@ const NavBar = () => {
 
   return (
     <nav className="md:h-[8vh] h-[10vh] flex justify-between shadow-xl items-center w-ful z-100 mx-auto p-8">
-      <h1 className="text-xl font-bold">My App</h1>
+      <h1 className="text-xl font-bold">Forza FERRARI</h1>
       <div className="nav-links duration-700 md:static absolute bg-white md:min-h-fit min-h-[20vh] left-0 top-[-100%] md:w-auto w-full z-10 flex items-center px-5">
         <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
           {role === "admin" ? (

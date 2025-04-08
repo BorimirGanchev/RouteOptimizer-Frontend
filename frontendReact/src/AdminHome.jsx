@@ -28,7 +28,7 @@ function AdminHome() {
         </span>{" "}
         {userName ? `Hello, ${userName}!` : ""}
       </h1>
-      <p className="text-2xl text-gray-600 mt-2">Slack is a messaging app for teams.</p>
+      {/* <p className="text-2xl text-gray-600 mt-2">Slack is a messaging app for teams.</p> */}
     </div>
   );
 }

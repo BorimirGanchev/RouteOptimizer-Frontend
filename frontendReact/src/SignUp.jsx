@@ -12,16 +12,24 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+    console.log("JWT Token:", token);
     axios
       .post("http://localhost:8000/signup", {
         name: name,
         email: email,
         password: password,
         role: role, 
-      })
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
       .then((response) => {
         console.log(response);
-        navigate("/");
+        window.location.reload();
       })
       .catch((error) => console.log(error));
   };
