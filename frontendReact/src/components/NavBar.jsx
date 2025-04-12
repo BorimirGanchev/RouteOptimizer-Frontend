@@ -49,7 +49,7 @@ const NavBar = () => {
             <>
               <li>
                 <Link to="/user-home" className="hover:text-gray-500 font-bold text-lg ">
-                  User Dashboard
+                  Home
                 </Link>
               </li>
               <li>

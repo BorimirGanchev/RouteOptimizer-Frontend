@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import ManageUsers from './ManageUsers';
 import NewOrder from './NewOrder';
 import Orders from './Orders';
+import ProfilePage from './ProfilePage';
 import { useNavigate } from "react-router-dom";
 
 function AuthChecker() {
@@ -75,6 +76,14 @@ function App() {
           element={
             <PrivateRoute role="user">
               <Orders />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRoute role="user">
+              <ProfilePage />
             </PrivateRoute>
           }
         />

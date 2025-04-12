@@ -11,6 +11,97 @@ const mapContainerStyle = {
   overflow: "hidden",
 };
 
+const darkMapStyle = [
+  {
+    elementType: "geometry",
+    stylers: [{ color: "#1d2c4d" }]
+  },
+  {
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#8ec3b9" }]
+  },
+  {
+    elementType: "labels.text.stroke",
+    stylers: [{ color: "#1a3646" }]
+  },
+  {
+    featureType: "administrative.country",
+    elementType: "geometry.stroke",
+    stylers: [{ color: "#4b6878" }]
+  },
+  {
+    featureType: "administrative.land_parcel",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#64779e" }]
+  },
+  {
+    featureType: "landscape.man_made",
+    elementType: "geometry.stroke",
+    stylers: [{ color: "#334e87" }]
+  },
+  {
+    featureType: "poi",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#6f9ba5" }]
+  },
+  {
+    featureType: "poi.park",
+    elementType: "geometry.fill",
+    stylers: [{ color: "#023e58" }]
+  },
+  {
+    featureType: "poi.park",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#3C7680" }]
+  },
+  {
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [{ color: "#304a7d" }]
+  },
+  {
+    featureType: "road",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#98a5be" }]
+  },
+  {
+    featureType: "road",
+    elementType: "labels.text.stroke",
+    stylers: [{ color: "#1d2c4d" }]
+  },
+  {
+    featureType: "transit",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#98a5be" }]
+  },
+  {
+    featureType: "transit",
+    elementType: "labels.text.stroke",
+    stylers: [{ color: "#1d2c4d" }]
+  },
+  {
+    featureType: "transit.line",
+    elementType: "geometry.fill",
+    stylers: [{ color: "#283d6a" }]
+  },
+  {
+    featureType: "transit.station",
+    elementType: "geometry",
+    stylers: [{ color: "#3a4762" }]
+  },
+  {
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [{ color: "#0e1626" }]
+  },
+  {
+    featureType: "water",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#4e6d70" }]
+  }
+];
+
+
 const center = {
   lat: 42.701946,
   lng: 23.344435,
@@ -64,7 +155,7 @@ const MapComponent = () => {
       const token = localStorage.getItem("token");
       if (!userId) return;
 
-      const userResponse = await axios.get(`http://localhost:8000/user`, {
+      const userResponse = await axios.get('http://localhost:8000/user', {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -159,6 +250,13 @@ const MapComponent = () => {
         mapContainerStyle={mapContainerStyle}
         center={center}
         zoom={6}
+        options={{
+          styles: darkMapStyle,
+          disableDefaultUI: true,
+          zoomControl: true,
+          gestureHandling: "greedy",
+          draggableCursor: "default",
+        }}
       >
         {directionsResult && <DirectionsRenderer directions={directionsResult} />}
       </GoogleMap>
