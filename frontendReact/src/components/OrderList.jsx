@@ -8,13 +8,14 @@ const OrderList = () => {
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiHost = import.meta.env.VITE_API_HOST || "http://localhost:8000";
 
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const response = await axios.get("http://localhost:8000/user", {
+      const response = await axios.get(`${apiHost}/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -31,7 +32,7 @@ const OrderList = () => {
       const token = localStorage.getItem("token");
       if (!userId) return;
 
-      const userResponse = await axios.get(`http://localhost:8000/user`, {
+      const userResponse = await axios.get(`${apiHost}/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -39,7 +40,7 @@ const OrderList = () => {
       if (!orderIds || orderIds.length === 0) return;
 
       const orderPromises = orderIds.map((orderId) =>
-        axios.get(`http://localhost:8000/orders/${orderId}`, {
+        axios.get(`${apiHost}/orders/${orderId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
       );

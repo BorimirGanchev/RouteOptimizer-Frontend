@@ -7,11 +7,12 @@ const SignIn = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
+  const apiHost = import.meta.env.VITE_API_HOST || "http://localhost:8000";
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/login", { email, password })
+      .post(`${apiHost}/login`, { email, password })
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);

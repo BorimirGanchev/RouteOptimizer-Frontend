@@ -5,12 +5,13 @@ function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const apiHost = import.meta.env.VITE_API_HOST || "http://localhost:8000";
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:8000/users", {
+        const response = await axios.get(`${apiHost}/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsers(response.data);
@@ -26,7 +27,7 @@ function ManageUsers() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:8000/users/${userId}/status`,
+        `${apiHost}/users/${userId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -48,7 +49,7 @@ function ManageUsers() {
   
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:8000/users/${user._id}`, {
+      await axios.delete(`${apiHost}/users/${user._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
   
@@ -63,7 +64,7 @@ function ManageUsers() {
     try {
       const token = localStorage.getItem("token");
   
-      const ordersResponse = await axios.get("http://localhost:8000/orders", {
+      const ordersResponse = await axios.get(`${apiHost}/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
   
@@ -105,7 +106,7 @@ function ManageUsers() {
         console.log(`Assigning cluster ${cluster} (Orders: ${orderIdsArray}) to ${assignedUser.name}`);
   
         await axios.put(
-          `http://localhost:8000/users/${assignedUser._id}/ordersasaign`,
+          `${apiHost}/users/${assignedUser._id}/ordersasaign`,
           { orders: orderIdsArray },
           { headers: { Authorization: `Bearer ${token}` } }
         );
