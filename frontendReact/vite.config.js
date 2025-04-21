@@ -17,7 +17,7 @@ export default defineConfig({
       },
       //allowedHosts: 'all',
       port: 5173,
-      host: true,
-      allowedHosts: ['dev.route-optimizer.innovatebulgaria.com', 'localhost']
+      host: "0.0.0.0",
+      //allowedHosts: ['dev.route-optimizer.innovatebulgaria.com', 'localhost']
     },
 })
