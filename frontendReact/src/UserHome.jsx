@@ -9,7 +9,7 @@ import money from './assets/save-money (2).png';
 import scales from './assets/scales-of-justice (1).png';
 
 function UserHome() {
-  const apiHost = import.meta.env.VITE_API_HOST || "http://localhost:8000";
+  const apiHost = import.meta.env.VITE_API_HOST ;
 
   useEffect(() => {
     const updateLocation = () => {
