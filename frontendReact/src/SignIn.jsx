@@ -7,7 +7,7 @@ const SignIn = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
-  const apiHost = import.meta.env.VITE_API_HOST ;
+  const apiHost = import.meta.env.VITE_API_URL ;
 
   const handleSubmit = (e) => {
     e.preventDefault();
