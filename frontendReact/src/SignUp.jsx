@@ -9,7 +9,7 @@ function SignUp() {
   const [role, setRole] = useState("user"); 
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-  const apiHost = import.meta.env.VITE_API_HOST || "http://localhost:8000";
+  const apiHost = import.meta.env.VITE_API_HOST ;
 
   const handleSubmit = (e) => {
     e.preventDefault();

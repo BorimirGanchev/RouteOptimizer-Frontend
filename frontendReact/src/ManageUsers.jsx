@@ -107,7 +107,7 @@ const center = {
 function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [mapCenter, setMapCenter] = useState(center);
-  const apiHost = import.meta.env.VITE_API_HOST || "http://localhost:8000";
+  const apiHost = import.meta.env.VITE_API_HOST ;
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey,
