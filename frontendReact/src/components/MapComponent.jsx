@@ -138,7 +138,7 @@ const MapComponent = () => {
         return;
       }
 
-      const response = await axios.get(`${apiHost}backend/user`, {
+      const response = await axios.get(`${apiHost}/backend/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -157,7 +157,7 @@ const MapComponent = () => {
       const token = localStorage.getItem("token");
       if (!userId) return;
 
-      const userResponse = await axios.get(`${apiHost}backend/user`, {
+      const userResponse = await axios.get(`${apiHost}/backend/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -169,7 +169,7 @@ const MapComponent = () => {
       }
 
       const orderPromises = orderIds.map(orderId =>
-        axios.get(`${apiHost}backend/orders/${orderId}`, {
+        axios.get(`${apiHost}/backend/orders/${orderId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
       );

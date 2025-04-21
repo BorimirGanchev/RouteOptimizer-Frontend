@@ -46,7 +46,7 @@ const NewOrder = () => {
         orderPrice: formData.orderPrice,
       };
   
-      const response = await axios.post(`${apiHost}backend/create`, orderData, {
+      const response = await axios.post(`${apiHost}/backend/create`, orderData, {
         headers: { "Content-Type": "application/json" },
       });
   

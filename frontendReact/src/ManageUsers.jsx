@@ -119,7 +119,7 @@ function ManageUsers() {
     const fetchUsers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`${apiHost}backend/users`, {
+        const response = await axios.get(`${apiHost}/backend/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const filtered = response.data.filter(
@@ -150,7 +150,7 @@ function ManageUsers() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `${apiHost}backend/users/${userId}/status`,
+        `${apiHost}/backend/users/${userId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -171,7 +171,7 @@ function ManageUsers() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`${apiHost}backend/users/${user._id}`, {
+      await axios.delete(`${apiHost}/backend/users/${user._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -184,7 +184,7 @@ function ManageUsers() {
   const handleAssignOrders = async () => {
     try {
       const token = localStorage.getItem("token");
-      const ordersResponse = await axios.get(`${apiHost}backend/orders`, {
+      const ordersResponse = await axios.get(`${apiHost}/backend/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -216,7 +216,7 @@ function ManageUsers() {
         const assignedUser = shuffledUsers[userIndex % shuffledUsers.length];
 
         await axios.put(
-          `${apiHost}backend/users/${assignedUser._id}/ordersasaign`,
+          `${apiHost}/backend/users/${assignedUser._id}/ordersasaign`,
           { orders: orderIdsArray },
           { headers: { Authorization: `Bearer ${token}` } }
         );

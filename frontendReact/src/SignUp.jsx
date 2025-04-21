@@ -16,7 +16,7 @@ function SignUp() {
     const token = localStorage.getItem("token");
     console.log("JWT Token:", token);
     axios
-      .post(`${apiHost}backend/signup`, {
+      .post(`${apiHost}/backend/signup`, {
         name: name,
         email: email,
         password: password,
