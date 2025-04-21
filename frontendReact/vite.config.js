@@ -15,5 +15,6 @@ export default defineConfig({
           res.end('ok');
         });
       },
+      allowedHosts: ['dev.route-optimizer.inonovatebulgaria.com', 'localhost'],
     },
 })
