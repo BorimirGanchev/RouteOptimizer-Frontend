@@ -32,7 +32,7 @@ function AdminHome() {
         className="relative w-full min-h-[66vh] bg-cover bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
-        <div className="absolute inset-0 z-10 gap-5 flex flex-col items-start justify-center px-8 md:pl-36">
+        <div className="absolute inset-0 z-1 gap-5 flex flex-col items-start justify-center px-8 md:pl-36">
           <h1 className="text-white text-4xl md:text-6xl font-bold max-w-xl lg:whitespace-nowrap">
             PROVIDING THE HIGHEST
           </h1>

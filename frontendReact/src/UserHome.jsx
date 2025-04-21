@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import bgImage from './assets/bgImage.jpg';
 import clock from './assets/clock (1).png';
 import equal from './assets/equal-mathematical-sign (1).png';
@@ -8,13 +9,49 @@ import money from './assets/save-money (2).png';
 import scales from './assets/scales-of-justice (1).png';
 
 function UserHome() {
+  const apiHost = import.meta.env.VITE_API_HOST || "http://localhost:8000";
+
+  useEffect(() => {
+    const updateLocation = () => {
+      const token = localStorage.getItem("token");
+
+      if (!navigator.geolocation || !token) return;
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          axios.post(
+            `${apiHost}/users/location`,
+            {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    };
+
+    updateLocation(); 
+
+    const intervalId = setInterval(updateLocation, 30000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden ">
       <div
         className="relative w-full min-h-[66vh] bg-cover bg-center"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
-        <div className="absolute inset-0 z-10 gap-5 flex flex-col items-start justify-center px-8 md:pl-36">
+        <div className="absolute inset-0 z-1 gap-5 flex flex-col items-start justify-center px-8 md:pl-36">
           <h1 className="text-white text-4xl md:text-6xl font-bold max-w-xl lg:whitespace-nowrap">
             PROVIDING THE HIGHEST
           </h1>

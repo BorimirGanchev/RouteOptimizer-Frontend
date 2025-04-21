@@ -94,7 +94,7 @@ function SignUp() {
                   type="checkbox"
                   checked={role === "user"}
                   onChange={() => handleRoleChange("user")}
-                  className="mr-2"
+                  className="mr-2 accent-red-700"
                 />
                 User
               </label>
@@ -103,7 +103,7 @@ function SignUp() {
                   type="checkbox"
                   checked={role === "admin"}
                   onChange={() => handleRoleChange("admin")}
-                  className="mr-2"
+                  className="mr-2 accent-red-500"
                 />
                 Admin
               </label>
@@ -112,7 +112,7 @@ function SignUp() {
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition duration-300"
+            className="mb-4 px-10 py-4 text-white font-bold rounded-md hover:opacity-90 bg-gradient-to-r from-black to-red-500"
           >
             Sign Up
           </button>
@@ -120,7 +120,7 @@ function SignUp() {
       </div>
 
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-80 text-center">
             <h2 className="text-lg font-semibold mb-4">Warning</h2>
             <p className="text-gray-700 mb-4">
