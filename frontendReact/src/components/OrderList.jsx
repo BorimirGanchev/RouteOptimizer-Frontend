@@ -15,7 +15,7 @@ const OrderList = () => {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      const response = await axios.get(`${apiHost}/user`, {
+      const response = await axios.get(`${apiHost}backend/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -32,7 +32,7 @@ const OrderList = () => {
       const token = localStorage.getItem("token");
       if (!userId) return;
 
-      const userResponse = await axios.get(`${apiHost}/user`, {
+      const userResponse = await axios.get(`${apiHost}backend/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -40,7 +40,7 @@ const OrderList = () => {
       if (!orderIds || orderIds.length === 0) return;
 
       const orderPromises = orderIds.map((orderId) =>
-        axios.get(`${apiHost}/orders/${orderId}`, {
+        axios.get(`${apiHost}backend/orders/${orderId}`, {
           headers: { Authorization: `Bearer ${token}` },
         })
       );

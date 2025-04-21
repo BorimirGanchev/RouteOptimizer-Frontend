@@ -12,7 +12,7 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${apiHost}/login`, { email, password })
+      .post(`${apiHost}backend/login`, { email, password })
       .then((response) => {
         if (response.data.token) {
           localStorage.setItem("token", response.data.token);

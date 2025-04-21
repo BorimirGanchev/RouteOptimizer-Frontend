@@ -20,7 +20,7 @@ function UserHome() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           axios.post(
-            `${apiHost}/users/location`,
+            `${apiHost}backend/users/location`,
             {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
