@@ -8,7 +8,7 @@ const OrderList = () => {
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const apiHost = import.meta.env.VITE_API_HOST;
+  const apiHost = import.meta.env.VITE_API_URL;
 
   const fetchUser = async () => {
     try {

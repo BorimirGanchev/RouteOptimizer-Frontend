@@ -6,7 +6,7 @@ import { useLoadScript } from "@react-google-maps/api";
 
 const libraries = ["places"];
 const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
-const apiHost = import.meta.env.VITE_API_HOST ;
+const apiHost = import.meta.env.VITE_API_URL ;
 
 const NewOrder = () => {
   const { isLoaded } = useLoadScript({
