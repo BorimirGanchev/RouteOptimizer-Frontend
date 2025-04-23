@@ -107,7 +107,7 @@ const center = {
   lng: 23.344435,
 };
 
-const apiHost = import.meta.env.VITE_API_URL ;
+const apiHost = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 const MapComponent = () => {
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_API_KEY;

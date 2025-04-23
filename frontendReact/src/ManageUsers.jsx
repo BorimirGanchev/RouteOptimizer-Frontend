@@ -107,7 +107,7 @@ const center = {
 function ManageUsers() {
   const [users, setUsers] = useState([]);
   const [mapCenter, setMapCenter] = useState(center);
-  const apiHost = import.meta.env.VITE_API_HOST ;
+  const apiHost = import.meta.env.VITE_API_URL || "http://localhost:8000";
   const googleMapsApiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey,
@@ -122,6 +122,8 @@ function ManageUsers() {
         const response = await axios.get(`${apiHost}/backend/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log("API Host:", apiHost);
+        console.log("Full API Response:", response); 
         const filtered = response.data.filter(
           (user) => user.location?.lat !== null && user.location?.lng !== null
         );
@@ -154,7 +156,6 @@ function ManageUsers() {
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-  
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === userId ? { ...user, status: newStatus } : user
