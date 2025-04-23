@@ -122,8 +122,6 @@ function ManageUsers() {
         const response = await axios.get(`${apiHost}/backend/users`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("API Host:", apiHost);
-        console.log("Full API Response:", response); 
         const filtered = response.data.filter(
           (user) => user.location?.lat !== null && user.location?.lng !== null
         );
