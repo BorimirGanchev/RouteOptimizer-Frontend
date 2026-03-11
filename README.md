@@ -1,128 +1,144 @@
-# RouteOptimizer – Frontend
+# RouteOptimizer – Frontend (React + Vite)
 
-Frontend application for **RouteOptimizer**, a tool that helps users plan and optimize routes more efficiently (e.g., reducing distance/time, improving stop order, and visualizing routes).
-
-> Repository: `BorimirGanchev/RouteOptimizer-Frontend`
-
----
-
-## Overview
-
-This project contains the **frontend** part of the RouteOptimizer system. It focuses on:
-
-- A clean UI to **create/manage route inputs** (locations / stops)
-- Triggering **route optimization** via a backend API
-- Displaying results in a user-friendly way (ordered stops, route summary, etc.)
-- A maintainable component structure and modern frontend tooling
+A **React + Vite** frontend for a courier/logistics route optimization system.  
+It includes **role-based authentication**, **admin tools** for managing couriers and orders, and **Google Maps** features (places autocomplete + live courier map).
 
 ---
 
-## Key Features
+## What This Project Does
 
-- Add/edit/remove route stops (addresses or coordinates)
-- Submit route data for optimization
-- View optimized order + summary details
-- Error handling and validation for user inputs
-- Responsive UI (desktop-friendly and usable on smaller screens)
+RouteOptimizer is designed for courier companies to improve delivery operations by:
 
-> If you want, I can tailor this section precisely to your real implemented features once you tell me what pages/components you have.
+- optimizing delivery routes,
+- improving allocation of deliveries across couriers,
+- tracking courier/user locations,
+- enabling admins to create and distribute orders efficiently.
+
+This repository contains the **frontend** (UI + API integration).
+
+---
+
+## Key Features (Implemented)
+
+### Authentication & Authorization
+- Login using backend API (`/backend/login`)
+- JWT stored in `localStorage`
+- **Role-based routing**:
+  - `admin` pages (e.g. manage users, create orders)
+  - `user` pages (e.g. user dashboard)
+- Session expiration check (auto logout when token expires)
+
+### Admin Features
+- **Create new delivery orders**
+  - Uses **Google Places Autocomplete** for sender & recipient addresses
+  - Submits to backend (`/backend/create`)
+- **Manage users/couriers**
+  - Fetch users from backend (`/backend/users`)
+  - View courier locations on a **Google Map** (markers + dark theme)
+  - Set courier status: `available` / `unavailable`
+  - Delete users
+- **Assign orders to couriers**
+  - Fetch order clustering/assignment data (`/backend/orders`)
+  - Assigns clusters to available couriers via backend request
+
+### User Features
+- User landing/dashboard page
+- **Live geolocation tracking**
+  - Periodically sends current location to backend (`/backend/users/location`)
 
 ---
 
 ## Tech Stack
 
-- **Frontend:** JavaScript/TypeScript (depending on repo setup)
-- **UI:** (React / Vue / etc. — update this based on your project)
-- **Styling:** (CSS / Tailwind / Bootstrap / etc.)
-- **Tooling:** Node.js + npm/yarn/pnpm
-- **API Integration:** REST (or GraphQL) calls to RouteOptimizer backend
+- **React (React Router)**
+- **Vite**
+- **TailwindCSS**
+- **Axios**
+- **Google Maps APIs**
+  - `@react-google-maps/api`
+  - `react-google-places-autocomplete`
 
 ---
 
 ## Getting Started (Local Development)
 
-### Prerequisites
-- **Node.js** (recommended: latest LTS)
-- One package manager:
-  - `npm` (included with Node), or
-  - `yarn`, or
-  - `pnpm`
+### 1) Go to the app folder
+Your React app lives in:
 
-### Install dependencies
+```bash
+cd frontendReact
+```
+
+### 2) Install dependencies
 ```bash
 npm install
 ```
 
-### Start the dev server
+### 3) Create `.env`
+Create a file: `frontendReact/.env`
+
+```bash
+VITE_API_URL=http://localhost:8000
+VITE_GOOGLE_API_KEY=YOUR_GOOGLE_MAPS_KEY
+```
+
+### 4) Run the dev server
 ```bash
 npm run dev
 ```
 
-### Build for production
-```bash
-npm run build
-```
-
-### Preview the production build
-```bash
-npm run preview
-```
-
-> If your scripts differ (e.g., CRA uses `start` instead of `dev`), tell me what’s inside your `package.json` and I’ll align these commands perfectly.
+Vite is configured with `--host`, so it will be reachable on your LAN as well.
 
 ---
 
-## Configuration
+## Routes / Pages (High-Level)
 
-This frontend typically needs a backend API base URL.
-
-Create a `.env` file in the project root (example):
-```bash
-# Example
-VITE_API_BASE_URL=http://localhost:8080
-```
-
-> Replace the env var names with your actual ones (Vite uses `VITE_` prefix; Next.js uses `NEXT_PUBLIC_`).
+- `/` → Sign In
+- `/user-home` → User home (protected: user)
+- `/admin-home` → Admin home (protected: admin)
+- `/manage-users` → Admin user/courier management (protected: admin)
+- `/create-order` → Create a new order (protected: admin)
+- `/signup` → Create user/admin (protected: admin)
+- `/orders`, `/profile` → user protected pages (WIP / lightweight currently)
 
 ---
 
-## Project Structure (High-Level)
+## Backend Integration
 
-A typical structure looks like:
+This frontend expects a backend exposing endpoints like:
 
-- `src/` – application source code (pages, components, services)
-- `public/` – static assets
-- `src/services/` or `src/api/` – API calls and HTTP client
-- `src/components/` – reusable UI components
-
----
-
-## What a Recruiter/Reviewer Should Look At
-
-- **Component design:** reusable, readable UI components
-- **State management:** predictable flow and good separation of concerns
-- **API layer:** clean abstraction for requests + error handling
-- **Validation & UX:** clear messages, loading states, edge-case handling
-- **Code quality:** naming, structure, formatting, and consistency
+- `POST /backend/login`
+- `POST /backend/signup`
+- `GET /backend/users`
+- `POST /backend/users/location`
+- `PUT /backend/users/:id/status`
+- `DELETE /backend/users/:id`
+- `GET /backend/orders`
+- `PUT /backend/users/:id/ordersasaign`
+- `POST /backend/create`
 
 ---
 
-## Roadmap / Possible Improvements
+## What a Recruiter Should Review
 
-- Authentication + user-specific saved routes
-- Map visualization (Google Maps / Mapbox / Leaflet)
-- Route export (CSV / PDF)
-- Tests (unit + integration)
+- **Role-based protected routing** (`PrivateRoute` usage in routing)
+- **Google Maps integration** (places autocomplete + map markers)
+- **Live location updates** using browser geolocation
+- **Admin operations** (CRUD-style user management + order assignment workflow)
+- Clear separation of UI and backend calls using Axios + environment variables
 
 ---
 
-## Related Repositories
+## Notes / Improvements (Next Steps)
 
-- Backend: *(add link here if you have it)*
+- Add frontend tests (Vitest + React Testing Library)
+- Better error UI (toast notifications, API error boundaries)
+- Improve token handling (refresh tokens or centralized auth provider)
+- Improve `/orders` and `/profile` pages (currently minimal)
 
 ---
 
 ## Author
 
-**BorimirGanchev**  
+**Borimir Ganchev**  
 GitHub: https://github.com/BorimirGanchev
