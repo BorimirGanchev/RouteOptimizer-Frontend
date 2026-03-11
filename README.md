@@ -119,16 +119,6 @@ This frontend expects a backend exposing endpoints like:
 
 ---
 
-## What a Recruiter Should Review
-
-- **Role-based protected routing** (`PrivateRoute` usage in routing)
-- **Google Maps integration** (places autocomplete + map markers)
-- **Live location updates** using browser geolocation
-- **Admin operations** (CRUD-style user management + order assignment workflow)
-- Clear separation of UI and backend calls using Axios + environment variables
-
----
-
 ## Notes / Improvements (Next Steps)
 
 - Add frontend tests (Vitest + React Testing Library)
